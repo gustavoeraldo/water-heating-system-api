@@ -1,8 +1,10 @@
 from fastapi import APIRouter
 
+from app.controllers.usersController import UsersController
+
 router = APIRouter()
 
-@router.get('/')
+@router.get('/info')
 async def read_user_info():
   """
   Return the user info.
@@ -15,3 +17,14 @@ async def read_user_info():
       "measurements_types": ["temperature", "capacitance", "inductance"]
     }
   ]
+
+
+@router.get('/')
+async def get_all_users():
+  """
+  Return all users
+  """
+
+  db_user = UsersController.get_all_users()
+  
+  return db_user

@@ -10,7 +10,10 @@ http://localhost:8000/redoc - redoc
 http://localhost:8000/docs- documentation JSON
 '''
 
-app = FastAPI()
+app = FastAPI(
+  title='LMI API',
+  version='0.0.1'
+  )
 
 origins = [
   'http://localhost:8080',
@@ -25,7 +28,7 @@ app.add_middleware(
   allow_headers=["*"],
 )
 
-app.include_router(api_router, prefix='/thermocouple_api/v1')
+app.include_router(api_router, prefix='/lmi')
 
 @app.get('/')
 def home_page():
@@ -34,5 +37,5 @@ def home_page():
   """
 
   return {
-    "message": "backend is working!!" 
+    "message": "check the api using: http://localhost:8000/docs" 
   }
